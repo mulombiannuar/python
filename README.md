@@ -1,3 +1,9 @@
+# About Me
+
+Hello! I'm **Anuary Mulombi**, an aspiring **Data Scientist** and **Machine Learning** enthusiast, with a solid foundation in **Software Engineering**. With over 8 years of experience in developing scalable, efficient software solutions, I've also decided to transition into the world of data science and machine learning. I am passionate about utilizing my engineering skills to tackle complex problems and build innovative models that drive actionable insights. I am excited to continue learning and contributing to the growing field of AI and machine learning.
+
+---
+
 # Python Projects Repository
 
 Welcome to the **Python Projects Repository**! 🎉 This repository is a hub for my work in **Python**, focusing on **machine learning**, **data science**, and other programming areas. It includes Jupyter notebooks, Python scripts, and experimental projects showcasing my journey and work in these fields.
