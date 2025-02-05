@@ -2,6 +2,11 @@ import streamlit as st
 import joblib
 import pandas as pd
 
+st.set_page_config(
+    page_title="Linear Regression Prediction App",
+    page_icon=":credit_card:"
+    )
+
 prediction_model = joblib.load('house_price_prediction_model.pkl')  
 st.title('Linear Regression Prediction App')
 st.write('Enter feature value to get prediction')
