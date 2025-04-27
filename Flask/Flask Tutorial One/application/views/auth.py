@@ -2,6 +2,7 @@ from flask import request
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 from application.services.user_service import UserService
+from application.forms.user_form import RegistrationForm, LoginForm
 
 auth = Blueprint('auth', __name__)
 
@@ -19,19 +20,33 @@ def login_user():
 
 @auth.route('/register', methods=['GET'])
 def register_page():
-    return render_template('auth/register.html')
+    form = RegistrationForm()
+    return render_template('auth/register.html', form=form)
 
 
-@auth.route('/register', methods=['POST'])
+@auth.route('/register', methods=['GET', 'POST'])
 def register_user():
-    data = request.form.to_dict()
-    user = UserService.create_user(data)
-    if user:
-        flash(message='Your registration was successful. Please proceed to login!', category='success')
-        return redirect(url_for('auth.login_page'))
-    else:
-        flash(message='Registration failed. Please try again.', category='danger')
-        return redirect(url_for('auth.register_page'))
+    form = RegistrationForm()
+
+    if form.validate_on_submit():  
+        data = {
+            'first_name': form.first_name.data,
+            'last_name': form.last_name.data,
+            'email': form.email.data,
+            'password': form.password.data,
+            'address': form.address.data,
+            'zip_code': form.zip_code.data,
+            'gender': form.gender.data
+        }
+        user = UserService.create_user(data)
+        if user:
+            flash(message='Your registration was successful. Please proceed to login!', category='success')
+            return redirect(url_for('auth.login_page'))
+        else:
+            flash(message='Registration failed. Please try again.', category='danger')
+            return redirect(url_for('auth.register_page'))
+    
+    return render_template('auth/register.html', form=form)
     
 
 @auth.route('/forgot-password', methods=['GET'])
