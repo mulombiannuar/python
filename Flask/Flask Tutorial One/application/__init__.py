@@ -1,12 +1,16 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_migrate import Migrate 
 from application.config import DevelopmentConfig, ProductionConfig
 from dotenv import load_dotenv
 import os
 
 # Initialize the database object
 db = SQLAlchemy()
+
+# Initialize the Migrate object
+migrate = Migrate()
 
 # Load environment variables from .env file
 load_dotenv()
@@ -25,6 +29,7 @@ def create_app():
     
     # Initialize the database with app
     db.init_app(app)
+    migrate.init_app(app, db)
 
     # Import and register Blueprints for modular structure
     from application.views.home import home
