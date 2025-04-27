@@ -7,4 +7,4 @@ home = Blueprint('home', __name__)
 
 @home.route('/', methods=['GET'])
 def home_page():
-    return render_template('home/home.html')
+    return render_template('auth/login.html')

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Flask Tutorial App" />
+    <meta name="author" content="Anuary Mulombi" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{% block title %}Home{% endblock %} | Flask Tutorial App</title>
+    <link
+      href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='css/auth.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='css/custom.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='img/favicon.ico') }}"
+      rel="shortcut icon"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="auth-content" {% if request.path == '/register' %} style="width: 800px"{% endif %}>
+        <div class="card">
+          <div class="card-body text-center">
+            <div class="mb-4">
+              <img
+                class="brand auth-logo"
+                src="{{ url_for('static', filename='img/logo-grey.png') }}"
+                alt="bootstraper logo"
+              />
+            </div>
+            {% include 'layouts/partials/alerts.html' %} 
+            {% block content %} {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+  </body>
+</html>

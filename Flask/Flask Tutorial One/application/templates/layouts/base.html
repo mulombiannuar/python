@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include 'layouts/partials/head.html' %}
+  <body>
+    <div class="wrapper">
+      {% include 'layouts/partials/sidebar.html' %}
+      <div id="body" class="active">
+        {% include 'layouts/partials/navbar.html' %} {% include
+        'layouts/partials/alerts.html' %} {% block content %} {%endblock %}
+      </div>
+    </div>
+    {% include 'layouts/partials/scripts.html' %}
+  </body>
+</html>
