@@ -50,7 +50,7 @@ def create_app():
 
     # Setup LoginManager for user session management
     login_manager = LoginManager()
-    login_manager.login_view = 'auth.login'  # Redirect to login page if not authenticated
+    login_manager.login_view = 'auth.login_page'  # Redirect to login page if not authenticated
     login_manager.init_app(app)
 
     @login_manager.user_loader

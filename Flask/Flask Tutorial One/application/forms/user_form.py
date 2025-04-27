@@ -3,6 +3,7 @@ from wtforms.validators import Email
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 
+
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[
         DataRequired(message="Please enter your email address."),
@@ -12,6 +13,7 @@ class LoginForm(FlaskForm):
         DataRequired(message="Please enter your password."),
         Length(min=8, message="Password must be at least 8 characters long.")
     ])
+    remember = BooleanField('Remember Me', default=False)
 
 
 

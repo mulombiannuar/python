@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from flask_login import current_user
+from flask_login import login_required, current_user
 from application.models.post import Post
 
 home = Blueprint('home', __name__)
@@ -8,3 +8,9 @@ home = Blueprint('home', __name__)
 @home.route('/', methods=['GET'])
 def home_page():
     return render_template('auth/login.html')
+
+
+@home.route('/dashboard', methods=['GET'])
+@login_required
+def dashboard_page():
+    return render_template('home/dashboard.html')

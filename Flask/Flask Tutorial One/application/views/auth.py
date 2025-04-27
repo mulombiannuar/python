@@ -1,6 +1,7 @@
 from flask import request
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_user, login_required, logout_user, current_user
+from werkzeug.security import check_password_hash
 from application.services.user_service import UserService
 from application.forms.user_form import RegistrationForm, LoginForm
 
@@ -9,13 +10,30 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET'])
 def login_page():
-    return render_template('auth/login.html')
+    form = RegistrationForm()
+    return render_template('auth/login.html', form=form)
 
 
 @auth.route('/login', methods=['POST'])
-def login_user():
-    # Process login form submission
-    pass
+def login_handler():
+    form = LoginForm()  
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
+        remember_me = form.remember.data  
+
+        user = UserService.get_user_by_email(email)
+        if user:
+            if check_password_hash(user.password, password):
+                flash('Logged in successfully!', category='success')
+                login_user(user, remember=remember_me)
+                return redirect(url_for('home.dashboard_page'))
+            else:
+                flash('Incorrect password, try again.', category='danger') 
+        else:
+            flash('Email address does not exist.', category='danger') 
+            
+    return render_template('auth/login.html', form=form)
 
 
 @auth.route('/register', methods=['GET'])
@@ -72,6 +90,8 @@ def reset_user_password(token):
 
 
 @auth.route('/logout')
-def logout_user():
-    # Logout logic
-    pass
+@login_required
+def logout_handler():
+    logout_user()
+    flash('You are logged out successfully!', category='success')
+    return redirect(url_for('auth.login_page'))

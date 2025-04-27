@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash
 from sqlalchemy.exc import SQLAlchemyError
 
 class UserService:
+    
     @staticmethod
     def create_user(data):
         try:
@@ -25,6 +26,7 @@ class UserService:
             print(f"Error creating user: {str(e)}")
             return None
 
+   
     @staticmethod
     def get_user_by_id(user_id):
         try:
@@ -32,7 +34,17 @@ class UserService:
         except SQLAlchemyError as e:
             print(f"Error fetching user: {str(e)}")
             return None
+        
+        
+    @staticmethod
+    def get_user_by_email(email):
+        try:
+            return User.query.filter_by(email=email).first()  
+        except SQLAlchemyError as e:
+            print(f"Error fetching user: {str(e)}")
+            return None
 
+        
     @staticmethod
     def update_user(user_id, data):
         try:

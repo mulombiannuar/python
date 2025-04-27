@@ -36,7 +36,9 @@
               </li>
               <div class="dropdown-divider"></div>
               <li>
-                <a href="#" class="dropdown-item"
+                <a
+                  href="{{ url_for('auth.logout_handler') }}"
+                  class="dropdown-item"
                   ><i class="fas fa-sign-out-alt"></i> Logout</a
                 >
               </li>
