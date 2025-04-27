@@ -3,3 +3,4 @@
 application/__pycache__
 application/models/__pycache__
 application/views/__pycache__
+migration/__pycache__
