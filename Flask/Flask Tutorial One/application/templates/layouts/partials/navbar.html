@@ -14,7 +14,14 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <i class="fas fa-user"></i> <span>Anuary Mulombi</span>
+            {% if current_user.is_authenticated %}
+            <i class="fas fa-user"></i>
+            <span
+              >{{ current_user.first_name }} {{ current_user.last_name }}</span
+            >
+            {% else %}
+            <i class="fas fa-user"></i> <span>Not logged in</span>
+            {% endif %}
             <i style="font-size: 0.8em" class="fas fa-caret-down"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-end nav-link-menu">
