@@ -1,0 +1,97 @@
+{% extends "layouts/base.html" %} {% block title %}Supermarket Mall Customer
+Segmentation{% endblock %} {% block content %}
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 page-header">
+        <h2 class="page-title mb-1">Supermarket Mall Customer Segmentation</h2>
+        <p>
+          This Flask app analyzes mall customer data using clustering algorithms
+          to segment customers and identify high-potential target groups for
+          informed marketing strategies.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-primary">
+          <div class="card-header bg-success text-white fw-bold">
+            <i class="fas fa-sign-in-alt me-2"></i> Enter Input Features
+          </div>
+          <div class="card-body">
+            <form
+              action="#"
+              method="POST"
+              id="predict-form"
+              enctype="multipart/form-data"
+              autocomplete="off"
+            >
+              {{ form.hidden_tag() }}
+              <div class="container">
+                <div class="row">
+                  <!-- annual_income_k (Integer) -->
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    <label for="annual_income_k" class="form-label"
+                      >Annual Income in $ (0-137)</label
+                    >
+                    <input
+                      type="number"
+                      name="annual_income_k"
+                      class="form-control {% if form.annual_income_k.errors %}is-invalid{% endif %}"
+                      placeholder="Enter Annual Income (k$)"
+                      value="{{ request.form.annual_income_k or '' }}"
+                      min="0"
+                      max="137"
+                      step="1"
+                      required
+                    />
+                    {% for error in form.annual_income_k.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- spending_score (Float) -->
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    <label for="spending_score" class="form-label"
+                      >Spending Score (0-100)</label
+                    >
+                    <input
+                      type="number"
+                      name="spending_score"
+                      class="form-control {% if form.spending_score.errors %}is-invalid{% endif %}"
+                      placeholder="Enter Spending Score"
+                      value="{{ request.form.spending_score or '' }}"
+                      min="0"
+                      max="100"
+                      step="1"
+                      required
+                    />
+                    {% for error in form.spending_score.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <div class="text-start">
+                  <button
+                    type="submit"
+                    id="predict-button"
+                    class="btn btn-success"
+                  >
+                    <i class="fas fa-brain me-2"></i> Predict Outcome Now
+                  </button>
+                </div>
+
+                <div id="prediction-result" class="mt-3">
+                  <!-- Prediction result will be displayed here -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

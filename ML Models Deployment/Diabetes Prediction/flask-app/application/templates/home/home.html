@@ -1,0 +1,219 @@
+{% extends "layouts/base.html" %} {% block title %}Diabetes Prediction Using
+Machine Learning{% endblock %} {% block content %}
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 page-header">
+        <h2 class="page-title mb-1">
+          Diabetes Prediction Using Machine Learning
+        </h2>
+        <p>
+          This Flask app predicts the likelihood of diabetes in Pima Indian
+          women based on diagnostic health measurements, providing a tool for
+          early detection and health risk assessment.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-primary">
+          <div class="card-header bg-success text-white fw-bold">
+            <i class="fas fa-sign-in-alt me-2"></i> Enter Input Features
+          </div>
+          <div class="card-body">
+            <form
+              action="#"
+              method="POST"
+              id="predict-form"
+              enctype="multipart/form-data"
+              autocomplete="off"
+            >
+              {{ form.hidden_tag() }}
+              <div class="container">
+                <div class="row">
+                  <!-- Pregnant (Integer) -->
+                  <div class="col-md-4 mb-3">
+                    <label for="pregnant" class="form-label"
+                      >Number Of Pregnancies</label
+                    >
+                    <input
+                      type="number"
+                      name="pregnant"
+                      class="form-control {% if form.pregnant.errors %}is-invalid{% endif %}"
+                      placeholder="Enter Number Of Pregnancies"
+                      value="{{ request.form.pregnant or '' }}"
+                      min="0"
+                      max="20"
+                      required
+                    />
+                    {% for error in form.pregnant.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- Glucose (Float) -->
+                  <div class="col-md-4 mb-3">
+                    <label for="glucose" class="form-label"
+                      >Glucose Level</label
+                    >
+                    <input
+                      type="number"
+                      name="glucose"
+                      class="form-control {% if form.glucose.errors %}is-invalid{% endif %}"
+                      placeholder="Enter Glucose Level"
+                      value="{{ request.form.glucose or '' }}"
+                      step="0.1"
+                      min="0"
+                      max="300"
+                      required
+                    />
+                    {% for error in form.glucose.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- Blood Pressure (Float) -->
+                  <div class="col-md-4 mb-3">
+                    <label for="blood_pressure" class="form-label"
+                      >Blood Pressure</label
+                    >
+                    <input
+                      type="number"
+                      name="blood_pressure"
+                      class="form-control {% if form.blood_pressure.errors %}is-invalid{% endif %}"
+                      placeholder="Enter Blood Pressure"
+                      value="{{ request.form.blood_pressure or '' }}"
+                      step="0.1"
+                      min="0"
+                      max="200"
+                      required
+                    />
+                    {% for error in form.blood_pressure.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- Skin Thickness (Float) -->
+                  <div class="col-md-4 mb-3">
+                    <label for="skin_thickness" class="form-label"
+                      >Skin Thickness</label
+                    >
+                    <input
+                      type="number"
+                      name="skin_thickness"
+                      class="form-control {% if form.skin_thickness.errors %}is-invalid{% endif %}"
+                      placeholder="Enter Skin Thickness"
+                      value="{{ request.form.skin_thickness or '' }}"
+                      step="0.1"
+                      min="0"
+                      max="100"
+                      required
+                    />
+                    {% for error in form.skin_thickness.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- Insulin (Float) -->
+                  <div class="col-md-4 mb-3">
+                    <label for="insulin" class="form-label"
+                      >Insulin Level</label
+                    >
+                    <input
+                      type="number"
+                      name="insulin"
+                      class="form-control {% if form.insulin.errors %}is-invalid{% endif %}"
+                      placeholder="Enter Insulin Level"
+                      value="{{ request.form.insulin or '' }}"
+                      step="0.1"
+                      min="0"
+                      max="1000"
+                      required
+                    />
+                    {% for error in form.insulin.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- BMI (Float, 1 decimal) -->
+                  <div class="col-md-4 mb-3">
+                    <label for="bmi" class="form-label">BMI</label>
+                    <input
+                      type="number"
+                      name="bmi"
+                      class="form-control {% if form.bmi.errors %}is-invalid{% endif %}"
+                      placeholder="Enter BMI"
+                      value="{{ request.form.bmi or '' }}"
+                      step="0.1"
+                      min="0"
+                      max="100"
+                      required
+                    />
+                    {% for error in form.bmi.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- Diabetes Pedigree (Float, 2 decimals) -->
+                  <div class="col-md-4 mb-3">
+                    <label for="diabetes_pedigree" class="form-label"
+                      >Diabetes Pedigree</label
+                    >
+                    <input
+                      type="number"
+                      name="diabetes_pedigree"
+                      class="form-control {% if form.diabetes_pedigree.errors %}is-invalid{% endif %}"
+                      placeholder="Enter Diabetes Pedigree"
+                      value="{{ request.form.diabetes_pedigree or '' }}"
+                      step="0.01"
+                      min="0"
+                      max="2.5"
+                      required
+                    />
+                    {% for error in form.diabetes_pedigree.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- Age (Integer) -->
+                  <div class="col-md-4 mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input
+                      type="number"
+                      name="age"
+                      class="form-control {% if form.age.errors %}is-invalid{% endif %}"
+                      placeholder="Enter Age"
+                      value="{{ request.form.age or '' }}"
+                      min="1"
+                      max="120"
+                      required
+                    />
+                    {% for error in form.age.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <div class="text-start">
+                  <button
+                    type="submit"
+                    id="predict-button"
+                    class="btn btn-success"
+                  >
+                    <i class="fas fa-brain me-2"></i> Predict Outcome Now
+                  </button>
+                </div>
+
+                <div id="prediction-result" class="mt-3">
+                  <!-- Prediction result will be displayed here -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
