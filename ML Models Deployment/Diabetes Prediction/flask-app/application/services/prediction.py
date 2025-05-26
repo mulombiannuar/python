@@ -28,4 +28,4 @@ def make_prediction(data: dict) -> str:
     """
     input_df = pd.DataFrame([data])
     prediction = loaded_rclf.predict(input_df)[0]
-    return "Has Diabetes" if prediction == 1 else "No Diabetes"
+    return "The Patient Has Diabetes" if prediction == 1 else "The Patient Does Not Have Diabetes"
