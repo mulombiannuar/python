@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import FloatField, IntegerField, StringField
+from wtforms import FloatField, IntegerField
 from wtforms.validators import DataRequired, NumberRange
-from flask_wtf.file import FileAllowed
 
 class UserInputForm(FlaskForm):
     annual_income_k = IntegerField('Annual Income (k$)', validators=[

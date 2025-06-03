@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Flask ML App" />
+    <meta name="author" content="Anuary Mulombi" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{% block title %}Home{% endblock %} | Flask ML App</title>
+    <link
+      href="{{ url_for('static', filename='vendor/fontawesome/css/fontawesome.min.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='vendor/fontawesome/css/solid.min.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='vendor/fontawesome/css/brands.min.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='vendor/datatables/datatables.min.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='css/master.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='css/custom.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='img/favicon.ico') }}"
+      rel="shortcut icon"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!-- sidebar -->
+      <nav id="sidebar" class="active">
+        <div class="sidebar-header">
+          <img
+            src="{{url_for('static', filename='img/logo-grey.png')}}"
+            alt="bootraper logo"
+            class="app-logo nav-logo"
+          />
+        </div>
+        <ul class="list-unstyled components text-secondary">
+          <li>
+            <a href="{{ url_for('home.home_page') }}"
+              ><i class="fas fa-home"></i> Home</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <div id="body" class="active">
+        <!-- navbar navigation component -->
+        <nav class="navbar navbar-expand-lg navbar-white bg-white">
+          <button type="button" id="sidebarCollapse" class="btn btn-light">
+            <i class="fas fa-bars"></i><span></span>
+          </button>
+        </nav>
+
+        <!-- begin main body -->
+        {% block content %} {%endblock %}
+      </div>
+    </div>
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/datatables/datatables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/initiate-datatables.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+      $(document).ready(function () {
+        $("#predict-form").on("submit", function (e) {
+          e.preventDefault();
+
+          const form = $("#predict-form");
+          const button = $("#predict-button");
+          const formData = new FormData(form[0]);
+
+          $.ajax({
+            url: "{{ url_for('home.predict_outcome') }}",
+            method: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            headers: {
+              "X-CSRFToken": $("meta[name='csrf-token']").attr("content"),
+            },
+            beforeSend: function () {
+              button.prop("disabled", true);
+              button.html(
+                '<i class="fas fa-spinner fa-spin"></i> Processing...'
+              );
+            },
+            success: function (response) {
+              console.log(response);
+              if (response.success && response.prediction) {
+                $("#prediction-result").html(`
+                  <div class="alert alert-success" role="alert">
+                    ${response.prediction}
+                  </div>
+                `);
+              } else {
+                $("#prediction-result").html(`
+                  <div class="alert alert-danger" role="alert">
+                    Prediction failed. Please try again.
+                  </div>
+                `);
+              }
+              button.prop("disabled", false);
+              button.html("Predict Outcome Now");
+            },
+            error: function (xhr) {
+              console.log("Error response:", xhr);
+              $("#prediction-result").html(`
+                <div class="alert alert-danger" role="alert">
+                  Something has gone wrong. Please try again.
+                </div>
+              `);
+              button.prop("disabled", false);
+              button.html("Predict Outcome Now");
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
