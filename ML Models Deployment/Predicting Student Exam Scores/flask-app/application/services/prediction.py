@@ -16,7 +16,29 @@ loaded_dummy_columns = joblib.load(dummy_columns_path)
 
 def make_prediction(data: dict) -> str:
     """
-    Predicts the cluster for a given customer input using the KMeans model.
+    Predicts student exam score based on lifestyle, academic, and socio-economic factors.
+    
+    Parameters:
+    - data (dict): A dictionary of input features, e.g.,
+      {
+        'gender': 'Male',
+        'part_time_job': 'Yes',
+        'extracurricular_participation': 'No',
+        'diet_quality': 'Fair',
+        'parental_education_level': 'Bachelor',
+        'internet_quality': 'Good',
+        'age': 18,
+        'study_hours_per_day': 4,
+        'social_media_hours': 2,
+        'netflix_hours': 1,
+        'attendance_percentage': 90,
+        'sleep_hours': 7,
+        'exercise_frequency': 3,
+        'mental_health_rating': 4
+      }
+      
+    Returns:
+    - str: The predicted student score.
     """
 
     # Convert to DataFrame
