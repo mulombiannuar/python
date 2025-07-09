@@ -106,7 +106,7 @@ class DataSplitter:
 # Example usage
 if __name__ == "__main__":
     # Example dataframe (replace with actual data loading)
-    # df = pd.read_csv('your_data.csv')
+    # df = pd.read_csv('./../data/AmesHousing.csv')
 
     # Initialize data splitter with a specific strategy
     # data_splitter = DataSplitter(SimpleTrainTestSplitStrategy(test_size=0.2, random_state=42))

@@ -1,5 +1,9 @@
+import sys
 import logging
 from abc import ABC, abstractmethod
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).parent.parent))  # Adds project_folder to path
 from utils.logger import setup_logger  
 
 import matplotlib.pyplot as plt
@@ -91,36 +95,20 @@ class OutlierDetector:
 
 # Example usage
 if __name__ == "__main__":
-    # # Example dataframe
-    # df = pd.read_csv("../extracted_data/AmesHousing.csv")
-    # df_numeric = df.select_dtypes(include=[np.number]).dropna()
+    # Example dataframe
+    df = pd.read_csv("./../data/AmesHousing.csv")
+    df_numeric = df.select_dtypes(include=[np.number]).dropna()
 
-    # # Initialize the OutlierDetector with the Z-Score based Outlier Detection Strategy
-    # outlier_detector = OutlierDetector(ZScoreOutlierDetection(threshold=3))
+    # Initialize the OutlierDetector with the Z-Score based Outlier Detection Strategy
+    outlier_detector = OutlierDetector(ZScoreOutlierDetection(threshold=3))
 
-    # # Detect and handle outliers
-    # outliers = outlier_detector.detect_outliers(df_numeric)
-    # df_cleaned = outlier_detector.handle_outliers(df_numeric, method="remove")
+    # Detect and handle outliers
+    outliers = outlier_detector.detect_outliers(df_numeric)
+    print(outliers.sum())
+    
+    df_cleaned = outlier_detector.handle_outliers(df_numeric, method="remove")
 
-    # print(df_cleaned.shape)
-    # # Visualize outliers in specific features
-    # # outlier_detector.visualize_outliers(df_cleaned, features=["SalePrice", "Gr Liv Area"])
+    print(df_cleaned.shape)
+    # Visualize outliers in specific features
+    outlier_detector.visualize_outliers(df_cleaned, features=["SalePrice", "Gr Liv Area"])
     pass
-
-
-#    SalePrice  Gr Liv Area
-# 0     200000        1500
-# 1     300000        2000
-# 2     400000        2500
-# 3     500000        3000
-# 4    1000000        4000
-# 5    2000000       10000
-
-
-#    SalePrice  Gr Liv Area
-# 0     200000        1500
-# 1     300000        2000
-# 2     400000        2500
-# 3     500000        3000
-# 4    1000000        4000
-# 5    1000000        4000

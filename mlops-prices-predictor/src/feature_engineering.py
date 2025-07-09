@@ -2,6 +2,9 @@ import logging
 from abc import ABC, abstractmethod
 import os
 from datetime import datetime
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))  # Adds project_folder to path
 
 import numpy as np
 import pandas as pd
@@ -58,9 +61,7 @@ class LogTransformation(FeatureEngineeringStrategy):
         logger.info(f"Applying log transformation to features: {self.features}")
         df_transformed = df.copy()
         for feature in self.features:
-            df_transformed[feature] = np.log1p(
-                df[feature]
-            )  # log1p handles log(0) by calculating log(1+x)
+            df_transformed[feature] = np.log1p(df[feature])  # log1p handles log(0) by calculating log(1+x)
         logger.info("Log transformation completed.")
         return df_transformed
 
@@ -241,11 +242,12 @@ class FeatureEngineer:
 # Example usage
 if __name__ == "__main__":
     # Example dataframe
-    # df = pd.read_csv('../extracted-data/your_data_file.csv')
+    df = pd.read_csv('./../data/AmesHousing.csv')
 
     # Log Transformation Example
-    # log_transformer = FeatureEngineer(LogTransformation(features=['SalePrice', 'Gr Liv Area']))
-    # df_log_transformed = log_transformer.apply_feature_engineering(df)
+    log_transformer = FeatureEngineer(LogTransformation(features=['SalePrice', 'Gr Liv Area']))
+    df_log_transformed = log_transformer.apply_feature_engineering(df)
+    print(df_log_transformed.head())
 
     # Standard Scaling Example
     # standard_scaler = FeatureEngineer(StandardScaling(features=['SalePrice', 'Gr Liv Area']))

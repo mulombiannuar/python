@@ -138,14 +138,16 @@ class MissingValueHandler:
 # Example usage
 if __name__ == "__main__":
     # Example dataframe
-    # df = pd.read_csv('../extracted-data/your_data_file.csv')
+    df = pd.read_csv('./../data/AmesHousing.csv')
 
     # Initialize missing value handler with a specific strategy
-    # missing_value_handler = MissingValueHandler(DropMissingValuesStrategy(axis=0, thresh=3))
-    # df_cleaned = missing_value_handler.handle_missing_values(df)
+    missing_value_handler = MissingValueHandler(DropMissingValuesStrategy(axis=0, thresh=3))
+    df_cleaned = missing_value_handler.handle_missing_values(df)
 
     # Switch to filling missing values with mean
     # missing_value_handler.set_strategy(FillMissingValuesStrategy(method='mean'))
     # df_filled = missing_value_handler.handle_missing_values(df)
 
-    pass
+    print("DataFrame after handling missing values:")
+    print(df_cleaned.head())
+ 

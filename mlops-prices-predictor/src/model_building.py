@@ -106,7 +106,7 @@ class ModelBuilder:
 # Example usage
 if __name__ == "__main__":
     # Example DataFrame (replace with actual data loading)
-    # df = pd.read_csv('your_data.csv')
+    # df = pd.read_csv('./../data/AmesHousing.csv')
     # X_train = df.drop(columns=['target_column'])
     # y_train = df['target_column']
 
