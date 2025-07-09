@@ -7,23 +7,11 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler, OneHotEncoder, StandardScaler, LabelEncoder
 
-# Define dynamic filename with timestamp
-log_filename = f"model_building_{datetime.now():%Y-%m-%d_%H-%M-%S}.log"
-
-# Build the full log file path
-log_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'logs')
-os.makedirs(log_path, exist_ok=True)  # Ensure 'logs/' directory exists
-
-# Complete path with filename
-log_file = os.path.join(log_path, log_filename)
+from utils.logger import setup_logger
 
 # Setup logging configuration
-logging.basicConfig(
-    filename=log_file,
-    filemode="a",
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
-)
+logger = setup_logger("model_building")
+
 
 # Abstract Base Class for Feature Engineering Strategy
 # ----------------------------------------------------
@@ -67,13 +55,13 @@ class LogTransformation(FeatureEngineeringStrategy):
         Returns:
         pd.DataFrame: The dataframe with log-transformed features.
         """
-        logging.info(f"Applying log transformation to features: {self.features}")
+        logger.info(f"Applying log transformation to features: {self.features}")
         df_transformed = df.copy()
         for feature in self.features:
             df_transformed[feature] = np.log1p(
                 df[feature]
             )  # log1p handles log(0) by calculating log(1+x)
-        logging.info("Log transformation completed.")
+        logger.info("Log transformation completed.")
         return df_transformed
 
 
@@ -101,10 +89,10 @@ class StandardScaling(FeatureEngineeringStrategy):
         Returns:
         pd.DataFrame: The dataframe with scaled features.
         """
-        logging.info(f"Applying standard scaling to features: {self.features}")
+        logger.info(f"Applying standard scaling to features: {self.features}")
         df_transformed = df.copy()
         df_transformed[self.features] = self.scaler.fit_transform(df[self.features])
-        logging.info("Standard scaling completed.")
+        logger.info("Standard scaling completed.")
         return df_transformed
 
 
@@ -133,12 +121,12 @@ class MinMaxScaling(FeatureEngineeringStrategy):
         Returns:
         pd.DataFrame: The dataframe with Min-Max scaled features.
         """
-        logging.info(
+        logger.info(
             f"Applying Min-Max scaling to features: {self.features} with range {self.scaler.feature_range}"
         )
         df_transformed = df.copy()
         df_transformed[self.features] = self.scaler.fit_transform(df[self.features])
-        logging.info("Min-Max scaling completed.")
+        logger.info("Min-Max scaling completed.")
         return df_transformed
 
 
@@ -166,7 +154,7 @@ class OneHotEncoding(FeatureEngineeringStrategy):
         Returns:
         pd.DataFrame: The dataframe with one-hot encoded features.
         """
-        logging.info(f"Applying one-hot encoding to features: {self.features}")
+        logger.info(f"Applying one-hot encoding to features: {self.features}")
         df_transformed = df.copy()
         encoded_df = pd.DataFrame(
             self.encoder.fit_transform(df[self.features]),
@@ -174,7 +162,7 @@ class OneHotEncoding(FeatureEngineeringStrategy):
         )
         df_transformed = df_transformed.drop(columns=self.features).reset_index(drop=True)
         df_transformed = pd.concat([df_transformed, encoded_df], axis=1)
-        logging.info("One-hot encoding completed.")
+        logger.info("One-hot encoding completed.")
         return df_transformed
     
     
@@ -202,14 +190,14 @@ class LabelEncoding(FeatureEngineeringStrategy):
         Returns:
         pd.DataFrame: The dataframe with label encoded features.
         """
-        logging.info(f"Applying label encoding to features: {self.features}")
+        logger.info(f"Applying label encoding to features: {self.features}")
         df_transformed = df.copy()
 
         for feature in self.features:
-            logging.info(f"Encoding feature: {feature}")
+            logger.info(f"Encoding feature: {feature}")
             df_transformed[feature] = self.encoders[feature].fit_transform(df[feature].astype(str))
 
-        logging.info("Label encoding completed.")
+        logger.info("Label encoding completed.")
         return df_transformed
 
 
@@ -233,7 +221,7 @@ class FeatureEngineer:
         Parameters:
         strategy (FeatureEngineeringStrategy): The new strategy to be used for feature engineering.
         """
-        logging.info("Switching feature engineering strategy.")
+        logger.info("Switching feature engineering strategy.")
         self._strategy = strategy
 
     def apply_feature_engineering(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -246,7 +234,7 @@ class FeatureEngineer:
         Returns:
         pd.DataFrame: The dataframe with applied feature engineering transformations.
         """
-        logging.info("Applying feature engineering strategy.")
+        logger.info("Applying feature engineering strategy.")
         return self._strategy.apply_transformation(df)
 
 

@@ -5,6 +5,7 @@ from src.feature_engineering import (
     MinMaxScaling,
     OneHotEncoding,
     StandardScaling,
+    LabelEncoding
 )
 from zenml import step
 
@@ -27,6 +28,8 @@ def feature_engineering_step(
         engineer = FeatureEngineer(MinMaxScaling(features))
     elif strategy == "onehot_encoding":
         engineer = FeatureEngineer(OneHotEncoding(features))
+    elif strategy == "label_encoding":
+        engineer = FeatureEngineer(LabelEncoding(features))
     else:
         raise ValueError(f"Unsupported feature engineering strategy: {strategy}")
 
