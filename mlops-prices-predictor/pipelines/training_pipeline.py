@@ -11,7 +11,10 @@ from zenml import Model, pipeline, step
 @pipeline(
     model=Model(
         # The name uniquely identifies this model
-        name="prices_predictor"
+        name="prices_predictor",
+        version=None,
+        license="Apache 2.0",
+        description="Price prediction model for houses.",
     ),
 )
 def ml_pipeline():

@@ -21,7 +21,8 @@ def outlier_detection_step(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
     if column_name not in df.columns:
         logging.error(f"Column '{column_name}' does not exist in the DataFrame.")
         raise ValueError(f"Column '{column_name}' does not exist in the DataFrame.")
-        # Ensure only numeric columns are passed
+        
+    # Ensure only numeric columns are passed
     df_numeric = df.select_dtypes(include=[int, float])
 
     outlier_detector = OutlierDetector(ZScoreOutlierDetection(threshold=3))

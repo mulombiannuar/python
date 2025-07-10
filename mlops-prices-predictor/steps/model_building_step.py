@@ -25,9 +25,7 @@ model = Model(
 
 
 @step(enable_cache=False, experiment_tracker=experiment_tracker.name, model=model)
-def model_building_step(
-    X_train: pd.DataFrame, y_train: pd.Series
-) -> Annotated[Pipeline, ArtifactConfig(name="sklearn_pipeline", is_model_artifact=True)]:
+def model_building_step(X_train: pd.DataFrame, y_train: pd.Series) -> Annotated[Pipeline, ArtifactConfig(name="sklearn_pipeline", is_model_artifact=True)]:
     """
     Builds and trains a Linear Regression model using scikit-learn wrapped in a pipeline.
 

@@ -11,9 +11,7 @@ from zenml import step
 
 
 @step
-def feature_engineering_step(
-    df: pd.DataFrame, strategy: str = "log", features: list = None
-) -> pd.DataFrame:
+def feature_engineering_step(df: pd.DataFrame, strategy: str = "log", features: list = None) -> pd.DataFrame:
     """Performs feature engineering using FeatureEngineer and selected strategy."""
 
     # Ensure features is a list, even if not provided
