@@ -1,0 +1,10 @@
+artifact_location: file:///home/mulombi/Codebase/Python/mlops-prices-predictor/mlruns/0/models/m-1ee5bf8ee14947299cc1318f7c5508ff/artifacts
+creation_timestamp: 1752169159498
+experiment_id: '0'
+last_updated_timestamp: 1752169161182
+model_id: m-1ee5bf8ee14947299cc1318f7c5508ff
+model_type: null
+name: model
+source_run_id: a76977cedb9a4ce48d8b6e120912dd6c
+status: 2
+status_message: null

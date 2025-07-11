@@ -1,0 +1,14 @@
+artifact_uri: file:///home/mulombi/Codebase/Python/mlops-prices-predictor/mlruns/0/b1459466764d48b9852f3e83efacc9c5/artifacts
+end_time: 1752168947751
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: b1459466764d48b9852f3e83efacc9c5
+run_name: gaudy-sponge-902
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1752168945411
+status: 3
+tags: []
+user_id: mulombi
