@@ -1,0 +1,15 @@
+artifact_uri: file:///home/mulombi/Codebase/Python/mlops-prices-predictor/mlruns/0/3cc92e0a7e3f49b9a1938df53bbd1937/artifacts
+end_time: 1752342569764
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 3cc92e0a7e3f49b9a1938df53bbd1937
+run_name: bright-worm-546
+run_uuid: 3cc92e0a7e3f49b9a1938df53bbd1937
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1752342567549
+status: 3
+tags: []
+user_id: mulombi

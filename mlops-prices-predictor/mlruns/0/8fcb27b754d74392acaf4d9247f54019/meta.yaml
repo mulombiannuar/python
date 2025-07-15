@@ -1,0 +1,15 @@
+artifact_uri: file:///home/mulombi/Codebase/Python/mlops-prices-predictor/mlruns/0/8fcb27b754d74392acaf4d9247f54019/artifacts
+end_time: 1752608619935
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 8fcb27b754d74392acaf4d9247f54019
+run_name: redolent-squid-977
+run_uuid: 8fcb27b754d74392acaf4d9247f54019
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1752608617834
+status: 3
+tags: []
+user_id: mulombi

@@ -18,3 +18,4 @@ test_*.xml
 .DS_Store
 Thumbs.db
 /uploads
+/zenml_artifacts

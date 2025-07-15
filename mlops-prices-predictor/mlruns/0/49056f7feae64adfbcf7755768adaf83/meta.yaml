@@ -1,0 +1,15 @@
+artifact_uri: file:///home/mulombi/Codebase/Python/mlops-prices-predictor/mlruns/0/49056f7feae64adfbcf7755768adaf83/artifacts
+end_time: 1752609279014
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 49056f7feae64adfbcf7755768adaf83
+run_name: salty-squirrel-200
+run_uuid: 49056f7feae64adfbcf7755768adaf83
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1752609277072
+status: 3
+tags: []
+user_id: mulombi

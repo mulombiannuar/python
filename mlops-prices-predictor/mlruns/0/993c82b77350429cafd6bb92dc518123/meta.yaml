@@ -1,0 +1,15 @@
+artifact_uri: file:///home/mulombi/Codebase/Python/mlops-prices-predictor/mlruns/0/993c82b77350429cafd6bb92dc518123/artifacts
+end_time: 1752431031134
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 993c82b77350429cafd6bb92dc518123
+run_name: salty-fowl-680
+run_uuid: 993c82b77350429cafd6bb92dc518123
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1752431028842
+status: 3
+tags: []
+user_id: mulombi
