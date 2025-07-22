@@ -1,0 +1,15 @@
+artifact_uri: file:///home/mulombi/Codebase/Python/mlops-prices-predictor/mlruns/0/f7f874a375a14c2aa2056c8d26a9e9b0/artifacts
+end_time: 1752650098906
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f7f874a375a14c2aa2056c8d26a9e9b0
+run_name: kindly-robin-488
+run_uuid: f7f874a375a14c2aa2056c8d26a9e9b0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1752650096728
+status: 3
+tags: []
+user_id: mulombi

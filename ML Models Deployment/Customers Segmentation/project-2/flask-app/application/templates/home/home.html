@@ -1,0 +1,179 @@
+{% extends "layouts/base.html" %}
+{% block title %}Customer Segmentation Using K-Means{% endblock %}
+
+{% block content %}
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 page-header">
+        <h2 class="page-title mb-1">Customer Segmentation Using K-Means</h2>
+        <p>
+          This Flask app segments customers based on their purchasing behavior using K-Means clustering,
+          helping businesses identify and target distinct customer groups for more effective marketing strategies.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-primary">
+          <div class="card-header bg-success text-white fw-bold">
+            <i class="fas fa-sign-in-alt me-2"></i> Enter Customer Information
+          </div>
+          <div class="card-body">
+            <form action="#" method="POST" id="predict-form" autocomplete="off">
+              {{ form.hidden_tag() }}
+              <div class="container">
+                <div class="row">
+
+                  <!-- income -->
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    <label for="Income" class="form-label">Annual Income ($)</label>
+                    <input
+                      type="number"
+                      name="income"
+                      class="form-control {% if form.income.errors %}is-invalid{% endif %}"
+                      placeholder="Enter Income"
+                      value="{{ request.form.income or '' }}"
+                      required
+                    />
+                    {% for error in form.income.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- age -->
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input
+                      type="number"
+                      name="age"
+                      class="form-control {% if form.age.errors %}is-invalid{% endif %}"
+                      placeholder="Enter Age"
+                      value="{{ request.form.age or '' }}"
+                      required
+                    />
+                    {% for error in form.age.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- total_spending -->
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    <label for="total_spending" class="form-label">Total Spending ($)</label>
+                    <input
+                      type="number"
+                      name="total_spending"
+                      class="form-control {% if form.total_spending.errors %}is-invalid{% endif %}"
+                      placeholder="Enter Total Spending"
+                      value="{{ request.form.total_spending or '' }}"
+                      required
+                    />
+                    {% for error in form.total_spending.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- recency -->
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    <label for="recency" class="form-label">Recency (days since last purchase)</label>
+                    <input
+                      type="number"
+                      name="recency"
+                      class="form-control {% if form.recency.errors %}is-invalid{% endif %}"
+                      placeholder="Enter Recency"
+                      value="{{ request.form.recency or '' }}"
+                      required
+                    />
+                    {% for error in form.recency.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- num_web_purchases -->
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    <label for="num_web_purchases" class="form-label">Number of Web Purchases</label>
+                    <input
+                      type="number"
+                      name="num_web_purchases"
+                      class="form-control {% if form.num_web_purchases.errors %}is-invalid{% endif %}"
+                      placeholder="e.g. 4"
+                      value="{{ request.form.num_web_purchases or '' }}"
+                      required
+                    />
+                    {% for error in form.num_web_purchases.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- num_store_purchases -->
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    <label for="num_store_purchases" class="form-label">Number of Store Purchases</label>
+                    <input
+                      type="number"
+                      name="num_store_purchases"
+                      class="form-control {% if form.num_store_purchases.errors %}is-invalid{% endif %}"
+                      placeholder="e.g. 3"
+                      value="{{ request.form.num_store_purchases or '' }}"
+                      required
+                    />
+                    {% for error in form.num_store_purchases.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- accepted_any -->
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    <label for="accepted_any" class="form-label">Accepted Any Campaign?</label>
+                    <select
+                      name="accepted_any"
+                      class="form-control {% if form.accepted_any.errors %}is-invalid{% endif %}"
+                      required
+                    >
+                      <option value="">Select</option>
+                      <option value="1" {% if request.form.accepted_any == '1' %}selected{% endif %}>Yes</option>
+                      <option value="0" {% if request.form.accepted_any == '0' %}selected{% endif %}>No</option>
+                    </select>
+                    {% for error in form.accepted_any.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+
+                  <!-- num_web_visits_month -->
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    <label for="num_web_visits_month" class="form-label">Number of Website Visits (Monthly)</label>
+                    <input
+                      type="number"
+                      name="num_web_visits_month"
+                      class="form-control {% if form.num_web_visits_month.errors %}is-invalid{% endif %}"
+                      placeholder="e.g. 5"
+                      value="{{ request.form.num_web_visits_month or '' }}"
+                      required
+                    />
+                    {% for error in form.num_web_visits_month.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <div class="text-start">
+                  <button type="submit" id="predict-button" class="btn btn-success">
+                    <i class="fas fa-brain me-2"></i> Predict Cluster
+                  </button>
+                </div>
+
+                <div id="prediction-result" class="mt-4">
+                  {% if prediction %}
+                    <div class="alert alert-info">{{ prediction }}</div>
+                  {% endif %}
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
