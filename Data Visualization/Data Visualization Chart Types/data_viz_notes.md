@@ -11,6 +11,8 @@
 
 ## 1. Chart Types in Data Visualization {#chart-types}
 
+[Comprehensive Guide to Chart Types and Graphs (ThoughtSpot)](https://www.thoughtspot.com/data-trends/data-visualization/types-of-charts-graphs)
+
 ### 1.1 Distribution Charts
 
 #### Histogram
