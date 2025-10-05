@@ -1,0 +1,22 @@
+
+MODEL SUMMARY FOR REPORT:
+
+Sample Size: 101,763 diabetic patients from 130 US hospitals (1999-2008)
+Outcome: 30-day hospital readmission (11.2% rate)
+Method: Multiple logistic regression
+
+Model Performance:
+- AUC-ROC: 0.624 (moderate discrimination)
+- McFadden's Pseudo R²: 0.0261
+- Likelihood Ratio Test: χ²(13) = 1856.92, p < 0.001
+- Classification Accuracy: 0.888
+- Sensitivity: 0.000
+- Specificity: 1.000
+
+Key Findings:
+Number of significant predictors: 10
+
+Top 3 Risk Factors:
+1. prior_inpatient: OR = 1.95, 95% CI = (1.88-2.04)
+2. prior_emergency: OR = 1.36, 95% CI = (1.29-1.44)
+3. number_diagnoses: OR = 1.04, 95% CI = (1.03-1.06)

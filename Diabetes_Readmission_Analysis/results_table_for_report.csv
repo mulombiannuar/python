@@ -1,0 +1,14 @@
+Variable,Odds Ratio,95% CI,p-value,Sig
+prior_inpatient,1.954,(1.88 - 2.04),0.0,***
+prior_emergency,1.359,(1.29 - 1.44),0.0,***
+number_diagnoses,1.044,(1.03 - 1.06),0.0,***
+time_in_hospital,1.024,(1.02 - 1.03),0.0,***
+insulin_used,1.088,(1.03 - 1.14),0.001,**
+diabetes_med_binary,1.106,(1.04 - 1.18),0.0012,**
+"C(A1C_status, Treatment('None'))[T.Elevated]",0.9,(0.84 - 0.96),0.0015,**
+num_medications,1.004,(1.00 - 1.01),0.0037,**
+"C(A1C_status, Treatment('None'))[T.Normal]",0.869,(0.79 - 0.96),0.0047,**
+"C(age_group, Treatment('0-30'))[T.50-70]",0.836,(0.73 - 0.96),0.0087,**
+"C(age_group, Treatment('0-30'))[T.30-50]",0.881,(0.77 - 1.01),0.0752,
+"C(age_group, Treatment('0-30'))[T.70+]",0.933,(0.82 - 1.07),0.3119,
+"C(gender, Treatment('Female'))[T.Male]",1.013,(0.97 - 1.05),0.5397,
