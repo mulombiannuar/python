@@ -1,7 +1,7 @@
 """
 Advanced Visualization Dashboard (Dash + Plotly)
 Single-file Dash app that:
- - loads the shared Google Sheet (CSV export)
+ - loads the excel dataset
  - cleans the data
  - shows an interactive choropleth, bar chart, scatter, network graph, and data table
  - provides simple dropdowns/controls for interactivity
@@ -16,13 +16,22 @@ Run:
 
 import pandas as pd
 import numpy as np
-import dash
-from dash import dcc, html, dash_table
-from dash.dependencies import Input, Output, State
-import plotly.express as px
-import plotly.graph_objects as go
-import networkx as nx
-import pycountry
+import dash  # Main Dash framework for building web apps
+from dash import (
+    dcc,
+    html,
+    dash_table,
+)  # Import core Dash components: graphs, HTML, and tables
+from dash.dependencies import (
+    Input,
+    Output,
+    State,
+)  # For linking UI elements via callbacks
+import plotly.express as px  # Simplified interface for creating interactive plots
+import plotly.graph_objects as go  # Low-level API for building custom Plotly visualizations
+import networkx as nx  # Library for creating and analyzing network graphs
+import pycountry  # Library for working with standardized country names and ISO codes
+
 
 # --- 1) Load data from Excel
 df = pd.read_excel(
