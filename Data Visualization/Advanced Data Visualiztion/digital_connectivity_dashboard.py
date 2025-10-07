@@ -57,7 +57,6 @@ expected_cols = [
 
 # We will do a best-effort mapping based on common header names observed in the sheet.
 col_map_candidates = {
-    # Possible names from the sheet -> desired name
     "ISO3": "ISO3",
     "Countries and areas": "Countries and areas",
     "Region": "Region",
@@ -320,7 +319,7 @@ app.layout = html.Div(
                                             },
                                         ),
                                         html.H2(
-                                            f"{df['Total'].mean():.0f}%",
+                                            f"{df['Total'].mean():.2f}%",
                                             style={
                                                 "color": colors["success"],
                                                 "fontWeight": "bold",
@@ -410,7 +409,7 @@ app.layout = html.Div(
                                             },
                                         ),
                                         html.H2(
-                                            f"{df['Wealth_Gap'].mean():.0f}%",
+                                            f"{df['Wealth_Gap'].mean():.2f}%",
                                             style={
                                                 "color": colors["danger"],
                                                 "fontWeight": "bold",
