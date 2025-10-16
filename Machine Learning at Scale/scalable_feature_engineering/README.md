@@ -1,10 +1,3 @@
-Scalable Feature Engineering and Data Processing
-
-**Course:** Machine Learning at Scale - MSc Data Science  
-**Assignment:** CAT (40 Marks)  
-**Author:** [Your Name]  
-**Date:** October 14, 2025
-
 ## Overview
 
 This project implements and compares three distributed feature engineering frameworks:
